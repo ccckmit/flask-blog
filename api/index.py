@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
+import os
 
 app = Flask(__name__)
 
@@ -11,12 +12,9 @@ posts = [
 # Route to serve the main page
 @app.route("/")
 def index():
-    return app.send_static_file("index.html")
-
-# Route to serve the static files (HTML, CSS, JS)
-@app.route("/<path:filename>")
-def static_files(filename):
-    return app.send_static_file(f"{filename}")
+    # print('cwd=', os.getcwd())
+    # print('list:', os.listdir())
+    return redirect("./static/index.html", code=302)
 
 # Route to get the list of posts
 @app.route("/list")
